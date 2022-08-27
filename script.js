@@ -1,10 +1,9 @@
-"use strick";
+"use strict";
 
 // Задача--------------------------------------------------/
 
-let isWeekendOnBirthday = (date) => {
-  let currentYear = new Date(date).setFullYear(2022);
-  let dayOfWeek = new Date(currentYear).getDay();
+let isWeekend = (date) => {
+  let dayOfWeek = new Date(date).getDay();
   return dayOfWeek === 0 || dayOfWeek === 6;
 };
 
@@ -31,7 +30,9 @@ class Employee extends Person {
     console.log(this.#salary * 12);
   }
   celebrate() {
-    if (isWeekendOnBirthday(this.birthDayDate)) {
+    const date = new Date(this.birthDayDate);
+    const currentYear = new Date().getFullYear();
+    if (isWeekend(date.setFullYear(currentYear))) {
       return super.celebrate();
     } else {
       return console.log("Happy Birthday, but I need to work");
@@ -54,13 +55,3 @@ let employee1 = new Employee(
 console.log(employee1);
 employee1.getYearSalary();
 employee1.celebrate();
-
-// Прошлый вариант функции----------------------------------------------------------/
-
-// let dayOfBirthday = (date) => {
-//   let currentYear = new Date(date).setFullYear(2022);
-//   let dayOfWeek = new Date(currentYear).getDay();
-//   return dayOfWeek === 0 || dayOfWeek === 6
-//     ? console.log("Happy Birthday, let's celebrate")
-//     : console.log("Happy Birthday, but I need to work");
-// };
